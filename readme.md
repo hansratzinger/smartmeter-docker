@@ -95,37 +95,104 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
   - Nach dem **erfolgreichen** einloggen über SSH kann der Raspi *headless* betrieben werden. Bildschirm und Tastatur werden nicht mehr benötigt und können entfernt werden.
 
+### Tipp: Einschalten von farbiger Anzeige von "ls" im Terminal
+
+```
+nano ~/.bashrc
+```
+
+Auskommentiere folgende Zeilen (Entferne das #)
+
+```
+# You may uncomment the following lines if you want `ls' to be colorized:
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors)"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lA'
+#
+# Some more alias to avoid making mistakes:
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+```
+
+Speichere die Datei mit *Strg+O* und schließe mit *Strg+X* und anschließend Raspi neu booten:
+
+```
+dietpi@Smartmeter:~$ sudo reboot
+```
+
+Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind blau. Die Eingabe von "l" liefert den Output von ls -lA. Die Befehle remove (rm), copy (cp) und move (mv) werden erst nach Rückfrage ausgeführt.
+
 ## Docker  
 
-**Smartmeter** ist in der *docker-compose.yaml* konfiguriert. Mittels *docker-compose* werden die jeweiligen Docker-Container gebaut und gestartet. Danach ist **Smartmeter** in Betrieb. Die gesammelten Strom-Daten werden in den Docker-Volumes persistent gespeichert.
+- ### Smartmeter von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
 
-### Smartmeter von Git-Hub klonen
+  In Dietpi einloggen:
 
-### Docker-Container generieren und starten
+  ```
+  dietpi@Smartmeter:~$ git clone https://github.com/hansratzinger/smartmeter-docker.git
 
-in Verzeichnis wechseln
+  Klone nach 'smartmeter-docker' ...
+  remote: Enumerating objects: 18, done.
+  remote: Counting objects: 100% (18/18), done.
+  remote: Compressing objects: 100% (14/14), done.
+  remote: Total 18 (delta 4), reused 7 (delta 3), pack-reused 0
+  Empfange Objekte: 100% (18/18), 29.24 KiB | 379.00 KiB/s, fertig.
+  Löse Unterschiede auf: 100% (4/4), fertig.
+  ```
 
-```
-cd /home/dietpi/smartmeter
-```
+  **Smartmeter** ist in der *docker-compose.yaml* konfiguriert. Mittels *docker-compose* werden die jeweiligen Docker-Container gebaut und gestartet. Danach ist **Smartmeter** in Betrieb. Die gesammelten Strom-Daten werden in den Docker-Volumes persistent gespeichert.
 
-docker-compose starten:
-    - Container werden gemäß der docker-compose.yaml neu gebaut (vorhandene werden NICHT gelöscht)
-    - Container werden gestartet
+- ### Anpassung der *docker-compose.yaml*
 
-```
-dietpi@DietPi:~/smartmeter$ docker-compose up -d
-```
+  Lade *docker-compose.yaml* in Nano und ändere die Zugangsberechtigungen für die Infux-Datenbank.
 
-Tipp: ohne -d wird Logging in die Console geschrieben
+  ```
+  dietpi@Smartmeter:~/smartmeter-docker$ nano docker-compose.yaml
+    ...
+    influxdb:
+      image: influxdb:1.8
+      container_name: influxdb
+      restart: unless-stopped
+      environment:
+        INFLUXDB_DB: smartmeter
+        INFLUXDB_HTTP_AUTH_ENABLED: "true"
+        INFLUXDB_ADMIN_USER: Admin
+        INFLUXDB_ADMIN_PASSWORD: Admin-Passwort
+        INFLUXDB_USER: User
+        INFLUXDB_USER_PASSWORD: User-Passwort
+    ...
+  ```
 
-Anschließend baut Docker die Container und startet sie.
+  Speichere die Datei mit Strg+O und schließe mit Strg+X
 
-Falls die docker-compose.yaml geändert werden muss und die Container neu gebildet werden sollen, muss erst docker gestopt werden:
+- ### Docker-Container generieren und starten
 
-```
-docker-compose down
-```
+  in Verzeichnis wechseln
+
+  ```
+  cd /home/dietpi/smartmeter-docker
+  ```
+
+  docker-compose starten:
+      - Container werden gemäß der docker-compose.yaml neu gebaut (vorhandene werden NICHT gelöscht)
+      - Container werden gestartet
+
+  ```
+  dietpi@DietPi:~/smartmeter$ docker-compose up -d
+  ```
+
+  Tipp: ohne -d wird Logging in die Console geschrieben
+
+  Anschließend baut Docker die Container und startet sie.
+
+  Falls die docker-compose.yaml geändert werden muss und die Container neu gebildet werden sollen, muss erst docker gestopt werden:
+
+  ```
+  docker-compose down
+  ```
 
 ### Portainer
 
