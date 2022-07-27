@@ -9,7 +9,7 @@ Aufbauend auf der hervorragenden Arbeit von [Michael Reitbauer](https://www.mich
 
 Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich ressourcensparender ist. Siehe: [DietPi vs Raspberry Pi OS Lite](https://dietpi.com/stats.html)
 
-Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, überspringe den nächsten Absatz und fahre mit Absatz [Docker](#docker) fort.
+Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, lese zuerst den Absatz [Smartmeter Installation ohne DietPi](#smartmeter-installation-ohne-dietPi) und fahre dann mit Absatz [Docker](#docker) fort.
 
 ## DietPi
 
@@ -342,7 +342,3 @@ sh get-docker.sh
 ```
 
 [Für mehr Information zur Docker-Installation]{<https://phoenixnap.com/kb/docker-on-raspberry-pi>}
-
-Fahren Sie mit Punkt .... weiter mit der Installation fort.
-
-## Installation auf vorhandenem System
