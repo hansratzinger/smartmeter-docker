@@ -131,6 +131,8 @@ AUTO_SETUP_GLOBAL_PASSWORD=Smartmeter
 # - E.g. the following (without the leading "#") will install the LXDE desktop automatically on first boot:
 # 0 - OpenSSH Client
 AUTO_SETUP_INSTALL_SOFTWARE_ID=0
+# 17 - git
+AUTO_SETUP_INSTALL_SOFTWARE_ID=17
 # 105 - OpenSSH Server
 AUTO_SETUP_INSTALL_SOFTWARE_ID=105
 # 134 - Docker-Compose

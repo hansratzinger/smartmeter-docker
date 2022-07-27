@@ -1,3 +1,5 @@
+# Achtung! README.md noch unfertig
+
 # Smartmeter Installation
 
 ## Einleitung
@@ -7,7 +9,7 @@ Aufbauend auf der hervorragenden Arbeit von [Michael Reitbauer](https://www.mich
 
 Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich ressourcensparender ist. Siehe: [DietPi vs Raspberry Pi OS Lite](https://dietpi.com/stats.html)
 
-Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufsetzen werden, lese bitte zuerst den Absatz [Installation auf vorhandenem System](#installation-auf-vorhandenem-system) am Ende dieser Dokumentation.
+Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, bitte zuerst den Absatz [Installation auf vorhandenem System](#installation-auf-vorhandenem-system) am Ende dieser Dokumentation lesen.
 
 ## DietPi
 
