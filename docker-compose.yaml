@@ -1,0 +1,73 @@
+version: "3"
+services:
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered-data:/data
+    networks:
+      - edge
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - edge
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    restart: unless-stopped
+    environment:
+      INFLUXDB_DB: smartmeter
+      INFLUXDB_HTTP_AUTH_ENABLED: "true"
+      INFLUXDB_ADMIN_USER: Admin
+      INFLUXDB_ADMIN_PASSWORD: Admin-Passwort
+      INFLUXDB_USER: User
+      INFLUXDB_USER_PASSWORD: User-Passwort
+    ports:
+      - "8082:8082"
+      - "8086:8086"
+      - "8089:8089"
+    volumes:
+      - influx-data:/var/lib/influxdb
+    networks:
+      - edge
+  mosquitto:
+    image: eclipse-mosquitto:1.6.14
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9005:9005"
+    volumes:
+      - mosquitto-log:/mosquitto/log
+      - mosquitto-data:/mosquitto/data
+    networks:
+      - edge
+  python:
+    build: ./python
+    container_name: python
+    # mount USB
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    restart: unless-stopped
+    networks:
+      - edge
+  #Create internal link network for Containers
+networks:
+  edge:
+
+    #Create Volumes for persistent Storage
+volumes:
+  grafana-data:
+  nodered-data:
+  influx-data:
+  mosquitto-log:
+  mosquitto-data:
