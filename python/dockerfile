@@ -1,0 +1,15 @@
+FROM python:slim-bullseye
+
+RUN pip3 install gurux-dlms          # library für die Übersetzung in eine XML
+RUN pip3 install beautifulsoup4      # library beautifulsoup4 
+RUN pip3 install paho-mqtt           # library für die MQTT Verbindung
+RUN pip3 install lxml                # library für XML Parser
+RUN pip3 install pyserial              # library für serielle Schnittstelle
+RUN pip3 install cryptography        # library für Verschlüsselung
+
+
+WORKDIR /smartmeter
+
+COPY EvnSmartmeterMQTTKaifaMA309.py EvnSmartmeterMQTTKaifaMA309.py
+
+CMD [ "python3", "EvnSmartmeterMQTTKaifaMA309.py" ]
