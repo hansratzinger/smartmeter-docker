@@ -9,7 +9,7 @@ Aufbauend auf der hervorragenden Arbeit von [Michael Reitbauer](https://www.mich
 
 Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich ressourcensparender ist. Siehe: [DietPi vs Raspberry Pi OS Lite](https://dietpi.com/stats.html)
 
-Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, bitte zuerst den Absatz [Installation auf vorhandenem System](#installation-auf-vorhandenem-system) am Ende dieser Dokumentation lesen.
+Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, überspringe den nächsten Absatz und fahre mit Absatz [Docker](#docker) fort.
 
 ## DietPi
 
@@ -125,6 +125,8 @@ dietpi@Smartmeter:~$ sudo reboot
 
 Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind blau. Die Eingabe von "l" liefert den Output von ls -lA. Die Befehle remove (rm), copy (cp) und move (mv) werden erst nach Rückfrage ausgeführt.
 
+**Hinweis:** Die Setzung der Alias muss für jeden User einzeln vorgenommen werden! (dietpi, root)
+
 ## Docker  
 
 - ### Smartmeter von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
@@ -176,12 +178,13 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   cd /home/dietpi/smartmeter-docker
   ```
 
-  docker-compose starten:
-      - Container werden gemäß der docker-compose.yaml neu gebaut (vorhandene werden NICHT gelöscht)
-      - Container werden gestartet
+  docker-compose starten
+
+  - Container werden gemäß der docker-compose.yaml neu gebaut (vorhandene werden NICHT gelöscht)
+  - Container werden gestartet
 
   ```
-  dietpi@DietPi:~/smartmeter$ docker-compose up -d
+  dietpi@DietPi:~/smartmeter$ sudo docker-compose up -d
   ```
 
   Tipp: ohne -d wird Logging in die Console geschrieben
@@ -191,7 +194,7 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   Falls die docker-compose.yaml geändert werden muss und die Container neu gebildet werden sollen, muss erst docker gestopt werden:
 
   ```
-  docker-compose down
+  sudo docker-compose down
   ```
 
 ### Portainer
