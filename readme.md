@@ -9,7 +9,7 @@ Aufbauend auf der hervorragenden Arbeit von [Michael Reitbauer](https://www.mich
 
 Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich ressourcensparender ist. Siehe: [DietPi vs Raspberry Pi OS Lite](https://dietpi.com/stats.html)
 
-Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, überspringe den nächsten Absatz und fahre mit [Absatz Docker](#docker) fort.
+Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, überspringe den nächsten Absatz und fahre mit Absatz [Docker](#docker) fort.
 
 ## DietPi
 
