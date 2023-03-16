@@ -1,5 +1,3 @@
-# Achtung! README.md noch unfertig
-
 # Smartmeter Installation
 
 ## Einleitung
