@@ -75,7 +75,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
   - Speichere das File dietpi.txt direkt im Hauptverzeichnis der SD-Karte
   
-  - Setze SD-Karte in Raspi ein und schließe folgende Kompunenten an um zu starten:
+  - Setze SD-Karte in Raspi ein und schließe folgende Komponenten an um zu starten:
 
     - Netzteil
     - Bildschirm
