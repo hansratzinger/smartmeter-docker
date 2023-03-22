@@ -60,6 +60,20 @@ services:
     restart: unless-stopped
     networks:
       - edge
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: DieistRootfürMariaDBaufHermes
+      MYSQL_DATABASE: db_test
+      MYSQL_USER: hans
+      MYSQL_PASSWORD: IlseMaria
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    networks:
+      - edge
   #Create internal link network for Containers
 networks:
   edge:
@@ -71,3 +85,4 @@ volumes:
   influx-data:
   mosquitto-log:
   mosquitto-data:
+  mariadb:
