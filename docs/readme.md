@@ -7,7 +7,7 @@ Aufbauend auf der hervorragenden Arbeit von [Michael Reitbauer](https://www.mich
 
 Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich ressourcensparender ist. Siehe: [DietPi vs Raspberry Pi OS Lite](https://dietpi.com/stats.html)
 
-Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, lese zuerst den Absatz [Smartmeter Installation ohne DietPi](#smartmeter-installation-ohne-dietPi) und fahre dann mit Absatz [Docker](#docker) fort.
+Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, lese zuerst den Absatz [Smartmeter Installation ohne DietPi](#smartmeter-installation-ohne-dietpi) und fahre dann mit Absatz [Docker](#docker) fort.
 
 ## DietPi
 
@@ -131,6 +131,8 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
 
   In Dietpi einloggen:
 
+  Du befindest dich jetzt im Verzeichnis /home/dietpi
+
   ```
   dietpi@Smartmeter:~$ git clone https://github.com/hansratzinger/smartmeter-docker.git
 
@@ -142,6 +144,12 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   Empfange Objekte: 100% (18/18), 29.24 KiB | 379.00 KiB/s, fertig.
   Löse Unterschiede auf: 100% (4/4), fertig.
   ```
+
+  Wechsle nun in das neu angelegte Verzeichnis
+
+  ````
+  dietpi@Hermes:~$ cd smartmeter-docker
+  ````
 
   **Smartmeter** ist in der *docker-compose.yaml* konfiguriert. Mittels *docker-compose* werden die jeweiligen Docker-Container gebaut und gestartet. Danach ist **Smartmeter** in Betrieb. Die gesammelten Strom-Daten werden in den Docker-Volumes persistent gespeichert.
 
@@ -166,7 +174,48 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
     ...
   ```
 
+  Passe die Zugangsberechtigungen für die MariaDB / MySql Datenbank an. Solltest du dieses Service nicht benöitgen, lösche die entsprechenden Zeilen aus der docker-compose.yaml
+
+  ````
+    mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: Root-Passwort
+      MYSQL_DATABASE: DB-Name
+      MYSQL_USER: User
+      MYSQL_PASSWORD: User-Passwort
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/mnt/usb/volumes/mariadb-data/_data
+    networks:
+      - edge
+  ````
+
   Speichere die Datei mit Strg+O und schließe mit Strg+X
+
+- ### Anpassung des Python-Programmes
+
+  Wechsle nun in das Python-Verzeichnis und passe das Programm mit Nano an:
+
+  ````
+  dietpi@Smartmeter:~/smartmeter-docker$ cd python
+
+  dietpi@HeSmartmeter:~/smartmeter-docker/python$ nano EvnSmartmeterMQTTKaifaMA309.py
+  ````
+
+# EVN Schlüssel eingeben zB. "36C66639E48A8CA4D6BC8B282A793BBB"
+
+  evn_schluessel = "hier EVN-Schlüssel eingeben"
+
+# MQTT Broker IP adresse Eingeben ohne Port! z.B: "10.0.0.5"
+
+mqttBroker = "hier IP-Adresse eingeben"
+
+Speichere die Datei mit *Strg+O* und schließe mit *Strg+X*
 
 - ### Docker-Container generieren und starten
 
@@ -182,7 +231,7 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   - Container werden gestartet
 
   ```
-  dietpi@DietPi:~/smartmeter$ sudo docker-compose up -d
+  dietpi@Smartmeter:~/smartmeter$ sudo docker-compose up -d
   ```
 
   Tipp: ohne -d wird Logging in die Console geschrieben
@@ -197,7 +246,7 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
 
 ### Portainer
 
-URL: <http://10.0.0.30:9002> bzw. IP des jeweiligen Rechners
+URL: <http://10.0.0.10:9002> bzw. IP des jeweiligen Rechners
 
 Menü links: Container - zeigt alle Container und ihren jeweiligen Status an
 
@@ -208,7 +257,7 @@ Menü links: Container - zeigt alle Container und ihren jeweiligen Status an
 1. Laufende Container anzeigen mit *docker ps*
 
 ```
-dietpi@DietPi:~/smartmeter$ docker ps
+dietpi@Smartmeter:~/smartmeter$ docker ps
 CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                                                                                                             NAMES
 290c24e84b86   influxdb:1.8             "/entrypoint.sh infl…"   12 minutes ago   Up 12 minutes   0.0.0.0:8082->8082/tcp, :::8082->8082/tcp, 0.0.0.0:8086->8086/tcp, :::8086->8086/tcp, 0.0.0.0:8089->8089/tcp, :::8089->8089/tcp   influxdb
 08b73d393d9a   portainer/portainer-ce   "/portainer"             4 weeks ago      Up 2 days       8000/tcp, 9443/tcp, 0.0.0.0:9002->9000/tcp, :::9002->9000/tcp                                                                     portainer
@@ -217,7 +266,7 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 2. Den bereits laufenden Dockercontainer unter seinem Namen *influxdb* aufrufen und auf die Shell aufrufen (/bin/sh). Damit gelangt man auf die Befehlsebene des Dockercontainers. Die angezeigte Nummer ist die ID des Containers. Mit ls kann man alle Verzeichnisse innerhalb des Containers anzeigen:
 
 ```
-dietpi@DietPi:~/smartmeter$ docker exec -it influxdb bash
+dietpi@Smartmeter:~/smartmeter$ docker exec -it influxdb bash
 
 root@5ad42861c09f:/# ls
 bin  boot  dev  entrypoint.sh  etc  home  init-influxdb.sh  lib  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -283,17 +332,14 @@ usw.
 
 ### Node Red in Browser aufrufen
 
-URL: <http://10.0.0.30:1880> oder [http://hermes:1880]
+URL: <http://10.0.0.10:1880> oder [http://smartmeter:1880]
+bzw. IP des jeweiligen Rechners
 
 Port: siehe docker-compose.yaml 1880
 
 ### Influx Datenbank verbinden
 
-- Warnungsfenster ignorieren falls in docker-compose.yaml angegeben:
-    volumes:
-      - influxSmartMeterData:/var/lib/influxdb/SmartMeter
-
-    Auf Fenster klicken und entfernen klicken
+- Warnungsfenster beachten, auf Fenster 2x klicken überprüfen ob Volumes persistiert wurden!
 
 - deploy (roter Button drücken)
 - Burger Menü / Palette verwalten / Installation / Module durchsuchen
