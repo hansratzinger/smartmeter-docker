@@ -1,5 +1,21 @@
 version: "3"
 services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: Root-Passwort
+      MYSQL_DATABASE: DB-Name
+      MYSQL_USER: User
+      MYSQL_PASSWORD: User-Passwort
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/mnt/usb_hermes/volumes/mariadb-data/_data
+    networks:
+      - edge
   nodered:
     image: nodered/node-red:latest
     container_name: nodered
@@ -7,7 +23,7 @@ services:
     ports:
       - "1880:1880"
     volumes:
-      - nodered-data:/data
+      - nodered-data:/mnt/usb_hermes/volumes/smartmeter_nodered-data/_data
     networks:
       - edge
   grafana:
@@ -17,7 +33,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - grafana-data:/var/lib/grafana
+      - grafana-data:/mnt/usb_hermes/volumes/smartmeter_grafana-data/_data
     networks:
       - edge
   influxdb:
@@ -36,7 +52,7 @@ services:
       - "8086:8086"
       - "8089:8089"
     volumes:
-      - influx-data:/var/lib/influxdb
+      - influx-data:/mnt/usb_hermes/volumes/smartmeter_influx-data/_data
     networks:
       - edge
   mosquitto:
@@ -47,8 +63,8 @@ services:
       - "1883:1883"
       - "9005:9005"
     volumes:
-      - mosquitto-log:/mosquitto/log
-      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mnt/usb_hermes/volumes/smartmeter_mosquitto-log/_data
+      - mosquitto-data:/mnt/usb_hermes/volumes/smartmeter_mosquitto-data/_data
     networks:
       - edge
   python:
@@ -60,29 +76,19 @@ services:
     restart: unless-stopped
     networks:
       - edge
-  mariadb:
-    image: mariadb:latest
-    container_name: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: Root-Passwort
-      MYSQL_DATABASE: DB-Name
-      MYSQL_USER: User
-      MYSQL_PASSWORD: User-Passwort
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "3306:3306"
-    networks:
-      - edge
   #Create internal link network for Containers
 networks:
-  edge:
-
-    #Create Volumes for persistent Storage
+  edge: #Create Volumes for persistent Storage
 volumes:
   grafana-data:
+    external: true
   nodered-data:
+    external: true
   influx-data:
+    external: true
   mosquitto-log:
+    external: true
   mosquitto-data:
+    external: true
   mariadb:
+    external: true
