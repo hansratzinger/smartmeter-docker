@@ -9,21 +9,19 @@ Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich re
 
 Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, lese zuerst den Absatz [Smartmeter Installation ohne DietPi](#smartmeter-installation-ohne-dietpi) und fahre dann mit Absatz [Docker](#docker) fort.
 
-## DietPi
+# DietPi
 
-Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch in der Sammlung hatte, war mein Bestreben **Smartmeter** auch auf einem leistungsschwächeren System auszuprobieren.
+Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch in der Sammlung hatte, war mein Bestreben **Smartmeter** auch auf einem leistungsschwächeren System auszuprobieren. Dies stellte sich als **nicht praktikabel** heraus. Für die vorliegende Konfiguration auf **Docker** ist mindestens ein **Pi3** nötig.
 
 ### Image erstellen
 
-- 32 oder 64 Bit?
+- 64 Bit
 
   Aktuelle Images zum Download auf <https://dietpi.com/>
 
   Menü: Downloads / Rasperry Pi
 
-  Rasperry Pi1, Pi2 und Pi Zero / 32bit -> <https://dietpi.com/downloads/images/DietPi_RPi-ARMv6-Bullseye.7z>
-
-  Rasperry Pi Zero2, Pi3 und Pi4 / 64bit -> <https://dietpi.com/downloads/images/DietPi_RPi-ARMv8-Bullseye.7z>
+  Rasperry Pi3 und Pi4 / 64bit -> <https://dietpi.com/downloads/images/DietPi_RPi-ARMv8-Bullseye.7z>
 
 - Flashen des Image
 
@@ -48,7 +46,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
     - Zeile 35 Setze hier die IP-Adresse deines Raspi ein
 
       ```
-      AUTO_SETUP_NET_STATIC_IP=194.162.0.11
+      AUTO_SETUP_NET_STATIC_IP=10.0.0.10
       ```
 
     - Zeile 37 Setze hier die IP-Adresse deines Internet-Gateways ein
@@ -125,7 +123,9 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
 
 **Hinweis:** Die Setzung der Alias muss für jeden User einzeln vorgenommen werden! (dietpi, root)
 
-## Docker  
+# Docker  
+
+**Hinweis:** Sollte nicht auf DietPi aufgesetzt werden, bitte zuerst hier weiter lesen: *[Smartmeter Installation ohne DietPi](ohne_DietPi)*
 
 - ### Smartmeter von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
 
@@ -148,7 +148,7 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   Wechsle nun in das neu angelegte Verzeichnis
 
   ````
-  dietpi@Hermes:~$ cd smartmeter-docker
+  dietpi@Smartmeter:~$ cd smartmeter-docker
   ````
 
   **Smartmeter** ist in der *docker-compose.yaml* konfiguriert. Mittels *docker-compose* werden die jeweiligen Docker-Container gebaut und gestartet. Danach ist **Smartmeter** in Betrieb. Die gesammelten Strom-Daten werden in den Docker-Volumes persistent gespeichert.
@@ -207,16 +207,22 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   dietpi@HeSmartmeter:~/smartmeter-docker/python$ nano EvnSmartmeterMQTTKaifaMA309.py
   ````
 
-# EVN Schlüssel eingeben zB. "36C66639E48A8CA4D6BC8B282A793BBB"
+  Deinen **EVN-Schlüssel** bekommst du auf Anfrage an
+  *smartmeter@netz-noe.at*
+  zB. "36C66639E48A8CA4D6BC8B282A793BBB"
 
+  ````
   evn_schluessel = "hier EVN-Schlüssel eingeben"
+  ````
 
-# MQTT Broker IP adresse Eingeben ohne Port! z.B: "10.0.0.5"
+  MQTT Broker IP adresse Eingeben ohne Port! z.B: "10.0.0.10"
 
-mqttBroker = "hier IP-Adresse eingeben"
+  ````
+  mqttBroker = "hier IP-Adresse eingeben"
+  ````
 
-Speichere die Datei mit *Strg+O* und schließe mit *Strg+X*
-
+  Speichere die Datei mit *Strg+O* und schließe mit *Strg+X*
+  
 - ### Docker-Container generieren und starten
 
   in Verzeichnis wechseln
@@ -250,7 +256,7 @@ URL: <http://10.0.0.10:9002> bzw. IP des jeweiligen Rechners
 
 Menü links: Container - zeigt alle Container und ihren jeweiligen Status an
 
-## Influxdb
+### Influxdb
 
 ### Influx commandline tool in Docker aufrufen
 
@@ -328,9 +334,9 @@ In der Smartmeter-DB sind die Measurements z.B.:
 
 usw.
 
-## Node Red
+### Node Red
 
-### Node Red in Browser aufrufen
+Node Red in Browser aufrufen
 
 URL: <http://10.0.0.10:1880> oder [http://smartmeter:1880]
 bzw. IP des jeweiligen Rechners
@@ -366,13 +372,15 @@ Tipp: mit STRG + auf die Arbeitsfläche klicken öffnet ein Menü
 Speicherplatz der Dockervolume im System:
 Docker Root Dir: /mnt/dietpi_userdata/docker-data/volumes
 
+<a name="ohne_DietPi"></a>
+
 ## Smartmeter Installation ohne DietPi
 
 Docker Installation und Version überprüfen:
 
 ```
-root@Hostname:~# docker --version
-Docker version 20.10.17, build 100c701
+root@Smartmeter:~# docker --version
+Docker version 23.0.2, build 569dd73
 ```
 
 Sollte Docker nicht installiert sein:
