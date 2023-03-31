@@ -139,6 +139,8 @@ AUTO_SETUP_INSTALL_SOFTWARE_ID=105
 AUTO_SETUP_INSTALL_SOFTWARE_ID=134
 # 162 - Docker
 AUTO_SETUP_INSTALL_SOFTWARE_ID=162
+# 185 - Portainer
+AUTO_SETUP_INSTALL_SOFTWARE_ID=185
 
 #------------------------------------------------------------------------------------------------------
 ##### Misc DietPi program settings #####

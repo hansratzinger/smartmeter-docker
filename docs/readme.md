@@ -29,7 +29,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
 ### Basis-Installation
 
-- Manuelle Installation
+- Manuelle Installation (nicht empfohlen)
 
   - Setze SD-Karte in Raspi ein und schließe das Netzteil an um zu starten
 
@@ -39,7 +39,9 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
 - Automatische Basis-Installation
 
-  - DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter /smartmeter/dietpi.txt
+  - DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter /smartmeter-docker/dietpi.txt
+
+    **Alle für Docker notwendigen Programme werden durch das Script automatisch installiert!**
 
   - Lade das Script in einen Editor und ändere folgende Zeilen:
 
@@ -310,6 +312,8 @@ docker-compose ist ein Automatisierungstool von Docker das die Bedienung wesentl
 
 ## Portainer
 
+Portainer ist ein nützliches Verwaltungstool für Docker. In DietPi ist es bereits durch die Konfigurationsdatei dietpi.txt automatisch installiert.
+
 URL: <http://10.0.0.10:9002> bzw. IP des jeweiligen Rechners
 
 Menü links: Container - zeigt alle Container und ihren jeweiligen Status an
@@ -441,6 +445,8 @@ root@Smartmeter:~# docker --version
 Docker version 23.0.2, build 569dd73
 ```
 
+### Docker Installation
+
 Sollte Docker nicht installiert sein:
 
 ```
@@ -452,3 +458,9 @@ sh get-docker.sh
 ```
 
 [Für mehr Information zur Docker-Installation]{<https://phoenixnap.com/kb/docker-on-raspberry-pi>}
+
+### Portainer Installation
+
+Portainer ist ein nützliches Verwaltungstool für Docker. In DietPi ist es bereits durch die Konfigurationsdatei dietpi.txt automatisch installiert.
+
+[Installation von Portainer für andere Linux-Versionen](https://docs.portainer.io/start/install-ce/server/docker/linux)
