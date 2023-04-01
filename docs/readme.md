@@ -131,9 +131,9 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
 
 # Docker  
 
-**Hinweis:** Sollte nicht auf DietPi aufgesetzt werden, bitte zuerst hier weiter lesen: *[Smartmeter Installation ohne DietPi](ohne_DietPi)*
+**Hinweis:** Sollte Smartmeter nicht auf DietPi aufgesetzt werden, bitte zuerst weiter unten das Kapitel: *Smartmeter Installation ohne DietPi* lesen!
 
-- ### Smartmeter von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
+- ### Smartmeter-Repository von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
 
   In Dietpi einloggen:
 
@@ -310,6 +310,13 @@ docker-compose ist ein Automatisierungstool von Docker das die Bedienung wesentl
   sudo docker-compose down
   ```
 
+## Speicherplatz der Dockervolumes
+
+Alle Dateien von smartmeter-docker befinden sich außerhalb der Docker-Container hier:
+ /mnt/dietpi_userdata/docker-data/volumes
+
+Bei Änderungen in der docker-compose.yaml und wiederholtem Neustart von docker-compose werden neue Container geschrieben, aber die Daten bleiben davon unberührt.
+
 ## Portainer
 
 Portainer ist ein nützliches Verwaltungstool für Docker. In DietPi ist es bereits durch die Konfigurationsdatei dietpi.txt automatisch installiert.
@@ -318,7 +325,11 @@ URL: <http://10.0.0.10:9002> bzw. IP des jeweiligen Rechners
 
 Menü links: Container - zeigt alle Container und ihren jeweiligen Status an
 
-## Influxdb
+## Influxdb Datenbank
+
+[Wikipedia](https://de.wikipedia.org/wiki/InfluxDB)
+
+Alle 5 Sekunden werden die Daten von Python-Programm ausgelesen und in der Influx-Datenbank gespeichert.
 
 ### Influx commandline tool in Docker aufrufen
 
@@ -396,12 +407,15 @@ In der Smartmeter-DB sind die Measurements z.B.:
 
 usw.
 
-## Node Red
+## Node Red - Weiterleitung der Daten
 
-Node Red in Browser aufrufen
+[Wikipedia](https://de.wikipedia.org/wiki/Node-RED)
 
-URL: <http://10.0.0.10:1880> oder [http://smartmeter:1880]
-bzw. IP des jeweiligen Rechners
+Mit Node Red können die vom Python-Programm ausgelesenen und per MQTT gesendeten Daten an die Influx-Datenbank weitergeleitet werden.
+
+### Einrichtung von Node-RED
+
+in Browser aufrufen URL: <http://IP-Deines-Raspi:1880>
 
 Port: siehe docker-compose.yaml 1880
 
@@ -431,10 +445,14 @@ Tipp: mit STRG + auf die Arbeitsfläche klicken öffnet ein Menü
 - inject auswählen und auf Arbeitsfläche ziehen
 - debug auswählen und auf Arbeitsfläche ziehen
 
-Speicherplatz der Dockervolume im System:
-Docker Root Dir: /mnt/dietpi_userdata/docker-data/volumes
+### Tutorial
 
-<a name="ohne_DietPi"></a>
+Auf dem Blog von Michael Reitbauer findes sich ein sehr informatives Tutorial dazu: [MQTT Nachrichten in Datenbank speichern](https://www.michaelreitbauer.at/mqtt-nachrichten-in-datenbank-speichern/)
+
+## Grafana - Anzeige des Stromverbrauchs
+
+Mit Grafana kann ein Dashboard zur Visualisierung der Stromdaten gestaltet werden.
+Dank an Michael Reitbauer für das informative [Grafana-Tutorial](https://www.michaelreitbauer.at/smart-meter-dashboard-in-grafana-influxdb/).
 
 ## Smartmeter Installation ohne DietPi
 
@@ -445,7 +463,7 @@ root@Smartmeter:~# docker --version
 Docker version 23.0.2, build 569dd73
 ```
 
-### Docker Installation
+## Docker Installation
 
 Sollte Docker nicht installiert sein:
 

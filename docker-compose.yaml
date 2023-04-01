@@ -13,7 +13,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mariadb-data:/mnt/usb_hermes/volumes/mariadb-data/_data
+      - mariadb-data:/var/lib/mysql
     networks:
       - edge
   nodered:
@@ -23,7 +23,7 @@ services:
     ports:
       - "1880:1880"
     volumes:
-      - nodered-data:/mnt/usb_hermes/volumes/smartmeter_nodered-data/_data
+      - nodered-data:/data
     networks:
       - edge
   grafana:
@@ -33,7 +33,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - grafana-data:/mnt/usb_hermes/volumes/smartmeter_grafana-data/_data
+      - grafana-data:/var/lib/grafana
     networks:
       - edge
   influxdb:
@@ -52,7 +52,7 @@ services:
       - "8086:8086"
       - "8089:8089"
     volumes:
-      - influx-data:/mnt/usb_hermes/volumes/smartmeter_influx-data/_data
+      - influx-data:/var/lib/influxdb
     networks:
       - edge
   mosquitto:
@@ -63,8 +63,8 @@ services:
       - "1883:1883"
       - "9005:9005"
     volumes:
-      - mosquitto-log:/mnt/usb_hermes/volumes/smartmeter_mosquitto-log/_data
-      - mosquitto-data:/mnt/usb_hermes/volumes/smartmeter_mosquitto-data/_data
+      - mosquitto-log:/mosquitto/log
+      - mosquitto-data:/mosquitto/data
     networks:
       - edge
   python:
@@ -81,14 +81,8 @@ networks:
   edge: #Create Volumes for persistent Storage
 volumes:
   grafana-data:
-    external: true
   nodered-data:
-    external: true
   influx-data:
-    external: true
   mosquitto-log:
-    external: true
   mosquitto-data:
-    external: true
-  mariadb:
-    external: true
+  mariadb-data:

@@ -22,6 +22,8 @@ mqttBroker = "hier IP-Adresse eingeben"
 mqttport = 1883
 mqttuser = ""
 mqttpasswort = ""
+# Aktuelle Werte auf Console ausgeben (True | False)
+printValue = False
 
 # Comport Config/Init
 comport = "/dev/ttyUSB0"
@@ -94,6 +96,26 @@ while 1:
 
     # Leistungsfaktor
     Leistungsfaktor = int(str(results_16)[208:212], 16)/1000
+
+    # Aktuelle Werte auf Console ausgeben (True | False)
+    if printValue:
+        print(datetime.now())
+        print('--------------------------------')
+        print('Wirkenergie+: ' + str(WirkenergieP) + ' kWh')
+        print('Wirkenergie: ' + str(WirkenergieN) + ' kWh')
+        print('MomentanleistungP+: ' + str(MomentanleistungP) + ' W')
+        print('MomentanleistungP-: ' + str(MomentanleistungN) + ' W')
+        print('Spannung L1: ' + str(SpannungL1) + ' V')
+        print('Spannung L2: ' + str(SpannungL2) + ' V')
+        print('Spannung L3: ' + str(SpannungL3) + ' V')
+        print('Strom L1: ' + str(StromL1) + ' A')
+        print('Strom L2: ' + str(StromL2) + ' A')
+        print('Strom L3: ' + str(StromL3) + ' A')
+        print('Leistungsfaktor: ' + str(Leistungsfaktor))
+        print('Momentanleistung: ' +
+              str(MomentanleistungP-MomentanleistungN) + ' W')
+        print()
+        print()
 
     # MQTT
     if useMQTT:
