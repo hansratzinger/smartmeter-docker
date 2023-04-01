@@ -157,56 +157,6 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
   dietpi@Smartmeter:~$ cd smartmeter-docker
   ````
 
-### Mounten eines externen Speichermediums (zb. USB-Stick)
-
-  Die Dateien die in Docker verwendet werden sind grundsätzlich nur innerhalb der sogenannten Container vorhanden und von aussen nicht zugänglich. Das stellt auch den großen Vorteil von Docker dar, dass diese Anwendungen gekapselt sind. Wenn jedoch ein Container neu gebildet werden muss, zb. Programmänderung, sind alle Daten die im Container vorhanden waren weg. Um daher dauerhafte Daten mit Docker generieren und bearbeiten zu können, gibt es die Möglichkeit sogenannte *volumes* im Container mit einem Pfad zu einem aussen liegenden Verzeichnis zu verbinden. Da der Raspi durch die SD-Karte nur ein begrenztes Speichervolumen aufweist, ist es sinnvoll diese Daten auf ein externes USB-Speichermedium zu schreiben.
-
-  Damit die Daten unabhängig von den Docker-Containern gespeichert werden können, sollte ein USB-Stick (oder eine USB-Festplatte) gemountet werden. Im Gegensatz zu Windows erfolgt dies nicht automatisch nach dem Anstecken am USB-Port, sondern muss manuell durchgeführt werden.
-
-- Zuerst muss ein Verzeichnis angelegt werden, in dem die Smartmeter-Dateien dauerhaft gespeichert werden können. Die Verzeichnisse für gemountete Speichermedien werden im Hauptverzeichnis */mnt* angelegt.
-
-    ````
-    dietpi@Smartmeter:~$ mkdir /mnt/usb
-    ````
-
-- Das externe Speichermedium an einen freien USB-Port anstecken.
-- [dietpi-drive_manager](https://dietpi.com/docs/dietpi_tools/system_configuration/#dietpi-drive-manager) ermöglicht komfortables Mounten und Verwalten von Speichermedien.
-
-    ````
-    dietpi@Smartmeter:~$ sudo dietpi-drive_manager
-    ````
-
-- Falls dieses Programm nicht zur Verfügung steht, ist **nach Anstecken** des USB-Sticks  der Einhängepunkt mit *lsblk* zu suchen:
-
-     ````
-    dietpi@Smartmeter:~$ lsblk
-    NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-    sda           8:0    1 58,5G  0 disk
-    └─sda1        8:1    1 58,5G  0 part
-    mmcblk0     179:0    0 29,7G  0 disk
-    ├─mmcblk0p1 179:1    0  128M  0 part /boot
-    └─mmcblk0p2 179:2    0 29,6G  0 part /
-     ````
-
-    In unserem Fall lautet der Einhängepunkt *sda1*. Wir verbinden nun  das Speichermedium mit dem Verzeichnis durch den *mount* Befehl.
-
-    ````
-    sudo mount /dev/sda1 /mnt/usb
-
-    ````
-
-    Danach kann mit *lsblk* kontrolliert werden, ob das Speichermedium korrekt gemountet wurde.
-
-    ````
-    dietpi@Hermes:~$ lsblk
-    NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-    sda           8:0    1 58,5G  0 disk
-    └─sda1        8:1    1 58,5G  0 part /mnt/usb
-    mmcblk0     179:0    0 29,7G  0 disk
-    ├─mmcblk0p1 179:1    0  128M  0 part /boot
-    └─mmcblk0p2 179:2    0 29,6G  0 part /
-    ````
-
 ## Docker-compose
 
 docker-compose ist ein Automatisierungstool von Docker das die Bedienung wesentlich erleichtert. Gesteuert wird es durch die Datei *docker-compose.yaml*.
