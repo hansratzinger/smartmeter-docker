@@ -15,7 +15,7 @@ Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufges
 
 Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch in der Sammlung hatte, war mein Bestreben **Smartmeter** auch auf einem leistungsschwächeren System auszuprobieren. Dies stellte sich jedoch als **nicht praktikabel** heraus. Für die vorliegende Konfiguration auf **Docker** ist mindestens ein **Pi3** nötig.
 
-### Image erstellen
+## Image erstellen
 
 - 64 Bit
 
@@ -29,43 +29,43 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
   Benutze zum Flashen der SD-Karte das Programm [balenaEtcher](https://www.balena.io/etcher/)
 
-### Basis-Installation
+## Basis-Installation
 
-- Manuelle Installation (nicht empfohlen)
+### Manuelle Installation (nicht empfohlen)
 
-  - Setze SD-Karte in Raspi ein und schließe das Netzteil an um zu starten
+- Setze SD-Karte in Raspi ein und schließe das Netzteil an um zu starten
 
-  - Folge den Anweisungen am Bildschirm
+- Folge den Anweisungen am Bildschirm
 
-  - Zur manuellen Installation von DietPi befolge bitte die Schritte der Anleitung in <https://dietpi.com/docs/install/>
+- Zur manuellen Installation von DietPi befolge bitte die Schritte der Anleitung in <https://dietpi.com/docs/install/>
 
-- Automatische Basis-Installation
+### Automatische Basis-Installation
 
-  - DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter /smartmeter-docker/dietpi.txt
+- DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter /smartmeter-docker/dietpi.txt
 
     **Alle für Docker notwendigen Programme werden durch das Script automatisch installiert!**
 
-  - Lade das Script in einen Editor und ändere folgende Zeilen:
+- Lade das Script in einen Editor und ändere folgende Zeilen:
 
-    - Zeile 35 Setze hier die IP-Adresse deines Raspi ein
+  - Zeile 35 Setze hier die IP-Adresse deines Raspi ein
 
       ```
       AUTO_SETUP_NET_STATIC_IP=10.0.0.10
       ```
 
-    - Zeile 37 Setze hier die IP-Adresse deines Internet-Gateways ein
+  - Zeile 37 Setze hier die IP-Adresse deines Internet-Gateways ein
 
       ```
       AUTO_SETUP_NET_STATIC_GATEWAY=194.162.0.248
       ```
 
-    - Zeile 85 Setze hier den SSH_PUBKEY deines PC ein um ohne Passwort auf den Raspi sicher zugreifen zu können: C:\Users\deinUser\ssh\id_rsa.pub
+  - Zeile 85 Setze hier den SSH_PUBKEY deines PC ein um ohne Passwort auf den Raspi sicher zugreifen zu können: C:\Users\deinUser\ssh\id_rsa.pub
 
       ```
       AUTO_SETUP_SSH_PUBKEY=ssh-ed25519 AAAAAAAA111111111111BBBBBBBBBBBB222222222222cccccccccccc333333333333 mySSHke
       ```
 
-    - Zeile 124 Setze hier dein globales Passwort ein
+  - Zeile 124 Setze hier dein globales Passwort ein
 
       ```
       AUTO_SETUP_GLOBAL_PASSWORD=dietpi
@@ -73,27 +73,27 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
       Du kannst mit den übrigen Einstellungen dieser Dateiversion starten. Mittels dietpi-config lassen sich alle Einstellungen auch später ändern.
 
-  - Speichere das File dietpi.txt direkt im Hauptverzeichnis der SD-Karte
+- Speichere das File dietpi.txt direkt im Hauptverzeichnis der SD-Karte
   
-  - Setze SD-Karte in Raspi ein und schließe folgende Komponenten an um zu starten:
+- Setze SD-Karte in Raspi ein und schließe folgende Komponenten an um zu starten:
 
-    - Netzteil
-    - Bildschirm
-    - Tastatur
-    - Netzwerkkabel
+  - Netzteil
+  - Bildschirm
+  - Tastatur
+  - Netzwerkkabel
 
-  - Warte einige Minuten. Es werden Updates durchgeführt.
-  - Folge den Anweisungen am Bildschirm
-  - Das System startet im *root* User
-  - Teste das Einloggen über SSH:
-    - Öffne *Terminal* oder *Power Shell* am PC und gib die von dir im *personal key* festgelegte Passphrase ein.
+- Warte einige Minuten. Es werden Updates durchgeführt.
+- Folge den Anweisungen am Bildschirm
+- Das System startet im *root* User
+- Teste das Einloggen über SSH:
+  - Öffne *Terminal* oder *Power Shell* am PC und gib die von dir im *personal key* festgelegte Passphrase ein.
 
       ```
       PS C:\Users\deinUser> ssh dietpi@DEINE.IP.ADRESSE
       Enter passphrase for key 'C:\Users\deinUser/.ssh/id_rsa':
       ```
 
-  - Nach dem **erfolgreichen** einloggen über SSH kann der Raspi *headless* betrieben werden. Bildschirm und Tastatur werden nicht mehr benötigt und können entfernt werden.
+- Nach dem **erfolgreichen** einloggen über SSH kann der Raspi *headless* betrieben werden. Bildschirm und Tastatur werden nicht mehr benötigt und können entfernt werden.
 
 ### Tipp: Einschalten von farbiger Anzeige von "ls" im Terminal
 
@@ -137,7 +137,7 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
 
 **Hinweis:** Sollte Smartmeter nicht auf DietPi aufgesetzt werden, bitte zuerst weiter unten das Kapitel: *Smartmeter Installation ohne DietPi* lesen!
 
-Durch die nun vorgenommene Installation von *DietPi* sind die notwendigen Programm für Docker bereits installiert.
+Durch die nun vorgenommene Installation von *DietPi* sind die notwendigen Programme für Docker bereits installiert.
 
 - ### Smartmeter-Repository von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
 
