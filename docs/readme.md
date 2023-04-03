@@ -7,6 +7,8 @@ Aufbauend auf der hervorragenden Arbeit von [Michael Reitbauer](https://www.mich
 
 Ich empfehle als Betriebssystem [DietPi](https://dietpi.com) da es wesentlich ressourcensparender ist. Siehe: [DietPi vs Raspberry Pi OS Lite](https://dietpi.com/stats.html)
 
+[DietPi](https://dietpi.com) hat auch den Vorteil, installationsfertige Images für eine große Anzahl von [Alternativen zum RasPi4](https://dietpi.com/#downloadinfo) anbieten zu können. So z.B. der *Odroid C4/HC4*, der zu einem Peis von wesentlich unter € 100,-- lieferbar ist.
+
 Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufgesetzt werden, lese zuerst den Absatz [Smartmeter Installation ohne DietPi](#smartmeter-installation-ohne-dietpi) und fahre dann mit Absatz [Docker](#docker) fort.
 
 # DietPi
@@ -110,6 +112,8 @@ alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
 ````
 
+### Tipp: Sicherheitsabfrage bei relevanten Systemcommandos
+
 Es empfiehlt sich die darunter befindlichen Zeilen ebenfalls durch entfernen des # zu aktivieren. Dadurch werden die Befehle rm (Löschen), cp (Kopieren) und mv (Umbenennen) durch die Bildung eines Alias mit -i durch eine Rückfrage vor dem Ausführen gesichert.
 
 ````
@@ -132,6 +136,8 @@ Danach wird das Listing von "ls" farbig dargestellt. Verzeichnisse z.B. sind bla
 # Docker  
 
 **Hinweis:** Sollte Smartmeter nicht auf DietPi aufgesetzt werden, bitte zuerst weiter unten das Kapitel: *Smartmeter Installation ohne DietPi* lesen!
+
+Durch die nun vorgenommene Installation von *DietPi* sind die notwendigen Programm für Docker bereits installiert.
 
 - ### Smartmeter-Repository von [Git-Hub](https://github.com/hansratzinger/smartmeter-docker/settings) klonen
 
