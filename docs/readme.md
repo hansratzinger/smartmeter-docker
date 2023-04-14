@@ -13,7 +13,9 @@ Sollte jedoch **Smartmeter** auf ein bereits vorhandenes laufendes System aufges
 
 # DietPi
 
-Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch in der Sammlung hatte, war mein Bestreben **Smartmeter** auch auf einem leistungsschwächeren System auszuprobieren. Dies stellte sich jedoch als **nicht praktikabel** heraus. Für die vorliegende Konfiguration auf **Docker** ist mindestens ein **Pi3** nötig.
+[DietPi](https://de.wikipedia.org/wiki/DietPi) ist eine auf Debian basierende Linux-Distribution, die für Single-Board Computer, wie Raspberry Pi, ODROID, ROCK Pi, PINE64, NanoPi und ASUS Tinker Board entwickelt wurde. DietPi unterstützt ebenso PCs und Virtuelle Maschinen. Das Projekt besitzt eine aktive Community und erzeugte über 200 Releases. Aktuell gibt es weltweit über ca. 120 000 laufende DietPi-Systeme.
+
+Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch in der Sammlung hatte, war mein Bestreben **Smartmeter** auch auf einem leistungsschwächeren System auszuprobieren. Dies stellte sich jedoch auch mit DietPi als **nicht praktikabel** heraus. Für die vorliegende Konfiguration auf **Docker** ist mindestens ein **Pi3** nötig.
 
 ## Image erstellen
 
@@ -190,7 +192,7 @@ docker-compose ist ein Automatisierungstool von Docker das die Bedienung wesentl
     ...
   ```
 
-  Passe die Zugangsberechtigungen für die MariaDB / MySql Datenbank an. Solltest du dieses Service nicht benöitgen, lösche die entsprechenden Zeilen aus der docker-compose.yaml
+  Passe die Zugangsberechtigungen für die MariaDB / MySql Datenbank an. Dieser Server wird von *Smartmeter* nicht benötigt, kann jedoch für Erweiterungen verwendet werden. Wenn du dieses Service nicht benötigst, lösche die entsprechenden Zeilen aus der docker-compose.yaml.
 
   ````
     mariadb:
@@ -421,7 +423,7 @@ Docker version 23.0.2, build 569dd73
 
 ## Docker Installation
 
-Sollte Docker nicht installiert sein:
+Sollte Docker noch nicht installiert sein:
 
 ```
 apt update && apt upgrade
