@@ -43,7 +43,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
 ### Automatische Basis-Installation
 
-- DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter /smartmeter-docker/dietpi.txt
+- DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter [https://github.com/hansratzinger/smartmeter-docker/blob/main/dietpi.txt](https://github.com/hansratzinger/smartmeter-docker/blob/main/dietpi.txt) und ist für *Smartmeter-Docker* bereits entsprechend angepasst.
 
     **Alle für Docker notwendigen Programme werden durch das Script automatisch installiert!**
 
@@ -70,7 +70,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
   - Zeile 124 Setze hier dein globales Passwort ein
 
       ```
-      AUTO_SETUP_GLOBAL_PASSWORD=dietpi
+      AUTO_SETUP_GLOBAL_PASSWORD=dein-globales-Passwort
       ```
 
       Du kannst mit den übrigen Einstellungen dieser Dateiversion starten. Mittels dietpi-config lassen sich alle Einstellungen auch später ändern.
