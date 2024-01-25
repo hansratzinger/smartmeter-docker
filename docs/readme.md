@@ -52,13 +52,13 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
   - Zeile 35 Setze hier die IP-Adresse deines Raspi ein
 
       ```
-      AUTO_SETUP_NET_STATIC_IP=10.0.0.10
+      AUTO_SETUP_NET_STATIC_IP=xxx.xxx.xxx.xxx
       ```
 
   - Zeile 37 Setze hier die IP-Adresse deines Internet-Gateways ein
 
       ```
-      AUTO_SETUP_NET_STATIC_GATEWAY=194.162.0.248
+      AUTO_SETUP_NET_STATIC_GATEWAY=xxx.xxx.xxx.xxx
       ```
 
   - Zeile 85 Setze hier den SSH_PUBKEY deines PC ein um ohne Passwort auf den Raspi sicher zugreifen zu können: C:\Users\deinUser\ssh\id_rsa.pub
