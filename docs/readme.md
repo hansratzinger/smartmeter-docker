@@ -75,7 +75,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
       Du kannst mit den übrigen Einstellungen dieser Dateiversion starten. Mittels dietpi-config lassen sich alle Einstellungen auch später ändern.
 
-- Speichere das File dietpi.txt direkt im Hauptverzeichnis der SD-Karte
+- Speichere das File dietpi.txt im Verzeichnis /boot/dietpi.txt der **SD-Karte**
   
 - Setze SD-Karte in Raspi ein und schließe folgende Komponenten an um zu starten:
 
@@ -226,7 +226,7 @@ docker-compose ist ein Automatisierungstool von Docker das die Bedienung wesentl
   ````
 
   Deinen **EVN-Schlüssel** bekommst du auf Anfrage an
-  *smartmeter@netz-noe.at*
+  *<smartmeter@netz-noe.at>*
   zB. "36C66639E48A8CA4D6BC8B282A793BBB"
 
   ````
