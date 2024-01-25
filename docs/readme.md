@@ -43,7 +43,7 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
 ### Automatische Basis-Installation
 
-- DietPi bietet eine automatische Basis-Installation per Script an. Das Script ist zu finden unter [https://github.com/hansratzinger/smartmeter-docker/blob/main/dietpi.txt](https://github.com/hansratzinger/smartmeter-docker/blob/main/dietpi.txt) und ist für *Smartmeter-Docker* bereits entsprechend angepasst.
+- DietPi bietet eine [automatische Basis-Installation](https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation) per Script an. Das für *Smartmeter-Docker* bereits angepasste Script ist hier zum [Download](https://github.com/hansratzinger/smartmeter-docker/blob/main/dietpi.txt)
 
     **Alle für Docker notwendigen Programme werden durch das Script automatisch installiert!**
 
