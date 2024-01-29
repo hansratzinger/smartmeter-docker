@@ -75,8 +75,9 @@ Meine erste Installation erfolgte auf einem Pi4. Da ich eine Reihe von Pi1 noch 
 
       Du kannst mit den übrigen Einstellungen dieser Dateiversion starten. Mittels dietpi-config lassen sich alle Einstellungen auch später ändern.
 
-- Speichere das File dietpi.txt im Verzeichnis /boot/dietpi.txt der **SD-Karte**
-  
+- Erstelle im Rootverezichnis das neue Verzeichnis *boot* und speichere das File dietpi.txt im Verzeichnis */boot/dietpi.txt* der **SD-Karte**.
+Achte darauf, dass der Editor das File im ***LF*** Modus speichert. <https://blog.boot.dev/clean-code/line-breaks-vs-code-lf-vs-crlf/>
+
 - Setze SD-Karte in Raspi ein und schließe folgende Komponenten an um zu starten:
 
   - Netzteil
