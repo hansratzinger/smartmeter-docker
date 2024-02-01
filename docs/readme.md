@@ -115,6 +115,28 @@ alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
 ````
 
+### Tipp: Parametrierung von Nano - Einschalten Zeilennummern und Tabspace 4 für Programmierung von Python
+
+Öffne nano:
+
+```
+nano 
+```
+
+Editiere folgende Zeilen
+
+```
+# Recommended nano editor configuration for Python programming
+# (~/.nanorc file)
+
+set linenumbers
+set autoindent
+set tabspace 4
+set tabstospaces
+````
+
+Speichere das File unter .nanorc
+
 ### Tipp: Sicherheitsabfrage bei relevanten Systemcommandos
 
 Es empfiehlt sich die darunter befindlichen Zeilen ebenfalls durch entfernen des # zu aktivieren. Dadurch werden die Befehle rm (Löschen), cp (Kopieren) und mv (Umbenennen) durch die Bildung eines Alias mit -i durch eine Rückfrage vor dem Ausführen gesichert.
